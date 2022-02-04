@@ -1,25 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
-import {NavbarComponent} from './components/generals/Navbar';
+import NavbarComponent from './components/generals/Navbar';
+import ItemListContainer from './components/ItemListContainer';
+import { Container, Row } from 'react-bootstrap';
 
 function App() {
+
+  const mensaje = "Hola, soy una prop.";
+
   return (
     <div className="App">
       <NavbarComponent></NavbarComponent>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container>
+        <Row  className='mt-5'>
+          <ItemListContainer greeting={mensaje}></ItemListContainer>
+        </Row>
+      </Container>
     </div>
   );
 }
