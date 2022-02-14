@@ -13,7 +13,7 @@ function App() {
       <NavbarComponent></NavbarComponent>
       <Container>
         <Row  className='mt-5'>
-          <ItemListContainer greeting={mensaje}></ItemListContainer>
+          <ItemListContainer></ItemListContainer>
         </Row>
       </Container>
     </div>
