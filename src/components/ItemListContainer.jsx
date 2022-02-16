@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect } from "react";
 import ItemList from "./ItemList";
 
 export default function ItemListContainer() {
@@ -61,15 +62,17 @@ export default function ItemListContainer() {
     },
   ];
 
-  const dataPromise = new Promise((resolve, reject) => {
-    setTimeout(function () {
-      resolve(itemsMock);
-    }, 2000);
-  });
+  useEffect(() => {
+    const dataPromise = new Promise((resolve, reject) => {
+      setTimeout(function () {
+        resolve(itemsMock);
+      }, 2000);
+    });
 
-  dataPromise.then((responseData) => {
-    setItems(responseData);
-  });
+    dataPromise.then((responseData) => {
+      setItems(responseData);
+    });
+  }, []);
 
   return <ItemList items={items}></ItemList>;
 }
