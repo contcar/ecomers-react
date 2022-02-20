@@ -2,9 +2,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import React, { useState } from "react";
 import { Row, Col, Button } from "react-bootstrap";
+import { useEffect } from "react";
 
 export default function ItemCount({ stock, initial, onAdd }) {
-  const [count, setCount] = useState(initial);
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    setCount(initial);
+  }, [initial]);
 
   return (
     <div>

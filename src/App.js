@@ -1,9 +1,8 @@
-import logo from './logo.svg';
 import './App.css';
 import NavbarComponent from './components/generals/Navbar';
-import ItemListContainer from './components/ItemListContainer';
-import { Container, Row } from 'react-bootstrap';
-import ItemDetailContainer from './components/ItemDetailContainer';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import Home from './components/Home';
+import ItemDetailContainer from './components/ItemDetailContainer'
 
 function App() {
 
@@ -11,13 +10,15 @@ function App() {
 
   return (
     <div className="App">
-      <NavbarComponent></NavbarComponent>
-      <Container>
-        <Row  className='mt-5'>
-        <ItemDetailContainer></ItemDetailContainer>
-          {/* <ItemListContainer></ItemListContainer> */}
-        </Row>
-      </Container>
+    <BrowserRouter>
+    <NavbarComponent></NavbarComponent>
+    <Routes>
+      <Route exact path='/' element={<Home/>}/>
+      <Route exact path='/category/:categoryId' element={<Home/>}/>
+      <Route exact path='/item/:itemId' element={<ItemDetailContainer/>}/>
+      {/* <Route path='/cart'></Route> */}
+    </Routes>
+    </BrowserRouter>
     </div>
   );
 }
