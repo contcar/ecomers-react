@@ -1,5 +1,7 @@
 import React from "react";
-import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
+import { useState } from "react";
+import { Button, Card, ListGroup, ListGroupItem, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import ItemCount from "./ItemCount";
 
 export default function ItemDetail({
@@ -10,6 +12,12 @@ export default function ItemDetail({
   stock,
   initial,
 }) {
+  const [itemAdded, setItemAdded] = useState(false);
+
+  const onAdd = () => {
+    console.log("wepa");
+    setItemAdded(true);
+  };
   return (
     <Card>
       <Card.Img height="600px" variant="top" src={img} />
@@ -19,7 +27,17 @@ export default function ItemDetail({
         <ListGroup className="list-group-flush">
           <ListGroupItem>Price: {price}</ListGroupItem>
         </ListGroup>
-        <ItemCount stock={stock} initial={initial}></ItemCount>
+        {!itemAdded ? (
+          <ItemCount stock={stock} initial={initial} onAdd={onAdd}></ItemCount>
+        ) : (
+          <Row className="mt-2">
+            <Link to={"/cart"} className="text-decoration-none text-reset">
+              <Button variant="outline-primary">
+                <span>Finalizar compra</span>
+              </Button>
+            </Link>
+          </Row>
+        )}
       </Card.Body>
     </Card>
   );
