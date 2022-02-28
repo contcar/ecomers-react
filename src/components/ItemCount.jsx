@@ -38,7 +38,7 @@ export default function ItemCount({ stock, initial, onAdd }) {
         <Button
           disabled={count <= 0}
           variant="outline-primary"
-          onClick={() => onAdd()}
+          onClick={() => onAdd(count)}
           size="sm"
         >
           <span>Añadir al carrito</span>

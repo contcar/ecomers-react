@@ -4,17 +4,26 @@ import { Col, Container, Row } from "react-bootstrap";
 import ItemDetail from "./itemDetail";
 import ItemsService from "../js/ItemsService";
 import { useParams } from "react-router-dom";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContextProvicer";
 
 export default function ItemDetailContainer() {
   let { itemId } = useParams();
   const [item, setItem] = useState({});
+  const [itemAdded, setitemAdded] = useState(false);
 
   useEffect(() => {
     ItemsService.GetItemById(itemId).then((response) => {
-      console.log("Respuesta", response);
       setItem(response);
     });
   }, []);
+
+  const { AddItem } = useContext(CartContext);
+
+  const onAdd = (quantity) => {
+    AddItem(item, quantity);
+    setitemAdded(true);
+  };
 
   return (
     <Container>
@@ -27,6 +36,8 @@ export default function ItemDetailContainer() {
             price={item.price}
             stock={item.stock}
             initial={item.initial}
+            itemAdded={itemAdded}
+            onAdd={onAdd}
           ></ItemDetail>
         </Col>
       </Row>
