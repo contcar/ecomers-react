@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import CartItem from "./CartItem";
-import { CartContext } from "../context/CartContextProvicer";
+import { CartContext } from "../context/CartContextProvider";
 import { Button, Col, Container, Row } from "react-bootstrap";
 
 function Cart() {

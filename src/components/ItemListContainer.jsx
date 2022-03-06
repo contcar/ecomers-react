@@ -1,13 +1,13 @@
 import React from "react";
 import { useEffect } from "react";
 import ItemList from "./ItemList";
-import ItemsService from "../js/ItemsService";
+import { GetItems } from "../services/ItemsService";
 import { useState } from "react";
 
 export default function ItemListContainer({ categoryFilterBy }) {
   const [items, setItems] = useState([]);
   useEffect(() => {
-    ItemsService.GetItems(categoryFilterBy).then((response) => {
+    GetItems(categoryFilterBy).then((response) => {
       setItems(response);
     });
   }, [categoryFilterBy]);

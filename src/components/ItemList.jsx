@@ -11,7 +11,7 @@ export default function ItemList({ items }) {
           key={i.id}
           title={i.title}
           detail={i.description}
-          img={i.pictureURL}
+          img={i.image}
         ></Item>
       </Link>
     </Col>

@@ -2,10 +2,10 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import ItemDetail from "./itemDetail";
-import ItemsService from "../js/ItemsService";
+import { GetItemById } from "../services/ItemsService";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
-import { CartContext } from "../context/CartContextProvicer";
+import { CartContext } from "../context/CartContextProvider";
 
 export default function ItemDetailContainer() {
   let { itemId } = useParams();
@@ -13,7 +13,7 @@ export default function ItemDetailContainer() {
   const [itemAdded, setitemAdded] = useState(false);
 
   useEffect(() => {
-    ItemsService.GetItemById(itemId).then((response) => {
+    GetItemById(itemId).then((response) => {
       setItem(response);
     });
   }, []);
@@ -32,10 +32,10 @@ export default function ItemDetailContainer() {
           <ItemDetail
             title={item.title}
             detail={item.description}
-            img={item.pictureURL}
+            img={item.image}
             price={item.price}
             stock={item.stock}
-            initial={item.initial}
+            initial={1}
             itemAdded={itemAdded}
             onAdd={onAdd}
           ></ItemDetail>
