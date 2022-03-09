@@ -28,7 +28,7 @@ export default function ItemDetail({
           <Row className="mt-2">
             <Link to={"/cart"} className="text-decoration-none text-reset">
               <Button variant="outline-primary">
-                <span>Finalizar compra</span>
+                <span>Ir al carrito</span>
               </Button>
             </Link>
           </Row>

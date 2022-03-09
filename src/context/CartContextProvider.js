@@ -14,6 +14,18 @@ export const CartProvider = ({ defaultValue = [], children }) => {
     }
   }
 
+  function GetItemQuantity(){
+    let totalQuantity = 0;
+    cartItems.forEach(x => totalQuantity += x.quantity);
+    return totalQuantity;
+  }
+
+  function GetTotalPrice(){
+    let totalPrice = 0;
+    cartItems.forEach(x => totalPrice += x.quantity * x.price);
+    return totalPrice;
+  }
+
   function RemoveItem(itemId) {
     const indexOfItem = cartItems.findIndex((x) => x.id == itemId);
     const itemsAux = [...cartItems];
@@ -36,7 +48,7 @@ export const CartProvider = ({ defaultValue = [], children }) => {
 
   return (
     <CartContext.Provider
-      value={{ cartItems, AddItem, RemoveItem, CleareState, ItemAlreadyExist }}
+      value={{ cartItems, AddItem, RemoveItem, CleareState, ItemAlreadyExist, GetItemQuantity, GetTotalPrice }}
     >
       {children}
     </CartContext.Provider>

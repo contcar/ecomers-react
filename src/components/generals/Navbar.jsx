@@ -30,7 +30,11 @@ export default function NavbarComponent() {
   return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container>
-        <Navbar.Brand href="/">Manga Spot</Navbar.Brand>
+        <Nav>
+          <Link to={"/"} className="text-decoration-none text-white">
+            Manga Spot
+          </Link>
+        </Nav>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="category-nav-dropdown">
           <Nav className="me-auto">

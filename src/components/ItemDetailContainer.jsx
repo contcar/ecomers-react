@@ -12,13 +12,14 @@ export default function ItemDetailContainer() {
   const [item, setItem] = useState({});
   const [itemAdded, setitemAdded] = useState(false);
 
+  const { AddItem, ItemAlreadyExist } = useContext(CartContext);
+
   useEffect(() => {
     GetItemById(itemId).then((response) => {
       setItem(response);
     });
+    setitemAdded(ItemAlreadyExist(itemId));
   }, []);
-
-  const { AddItem } = useContext(CartContext);
 
   const onAdd = (quantity) => {
     AddItem(item, quantity);
