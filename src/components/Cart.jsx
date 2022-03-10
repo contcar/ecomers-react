@@ -1,11 +1,17 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import CartItem from "./CartItem";
 import { CartContext } from "../context/CartContextProvider";
-import { Button, Col, Container, ListGroup, Row } from "react-bootstrap";
+import { Button, Col, Container, ListGroup, Modal, Row } from "react-bootstrap";
+import Checkout from "./Checkout";
 
 function Cart() {
   const { cartItems, RemoveItem, CleareState, GetTotalPrice } =
     useContext(CartContext);
+
+  const [modalShow, setModalShow] = useState(false);
+  const handleClose = () => setModalShow(false);
+  const handleShow = () => setModalShow(true);
+
   if (cartItems.length > 0) {
     return (
       <Container>
@@ -15,6 +21,7 @@ function Cart() {
               {cartItems.map((i) => (
                 <CartItem
                   id={i.id}
+                  key={i.id}
                   title={i.title}
                   detail={i.description}
                   img={i.image}
@@ -37,10 +44,29 @@ function Cart() {
               <h2>Total a pagar: ${GetTotalPrice()}</h2>
             </div>
             <div className="mt-2">
-              <Button>Finalizar compra</Button>
+              <Button onClick={handleShow}>Finalizar compra</Button>
             </div>
           </Col>
         </Row>
+
+        <Modal show={modalShow} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Finaliza tu compra</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Checkout
+              cartItems={cartItems}
+              totalToPay={GetTotalPrice()}
+              clearCart={CleareState}
+              closeModal={handleClose}
+            ></Checkout>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Cerrar
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Container>
     );
   } else {

@@ -2,16 +2,16 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import ItemDetail from "./itemDetail";
-import { GetItemById } from "../services/ItemsService";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { CartContext } from "../context/CartContextProvider";
+import useFireStore from "../hooks/useFireStore";
 
 export default function ItemDetailContainer() {
   let { itemId } = useParams();
   const [item, setItem] = useState({});
   const [itemAdded, setitemAdded] = useState(false);
-
+  const { GetItemById } = useFireStore();
   const { AddItem, ItemAlreadyExist } = useContext(CartContext);
 
   useEffect(() => {
